@@ -58,7 +58,11 @@ class Repeatable implements \Iterator, \JsonSerializable, \Countable {
     }
 
     public function count(): int{
-        return count($this->toArray());
+        if (is_array($this->source) || $this->source instanceof Countable) {
+            return count($this->toArray());
+        } else {
+            return 0;
+        }
     }
 
     /**
